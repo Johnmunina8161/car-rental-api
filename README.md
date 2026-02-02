@@ -66,3 +66,4 @@ Admins can manage cars, locations, users, and rentals.
 - John Munina
 - Antony Ochieng
 - Xyste Chrysologue RABEARSON
+- Oluwatobiloba Tolulope Makinde
