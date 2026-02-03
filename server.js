@@ -1,10 +1,13 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const { connectToDB } = require('./config/database.js');
+const locationRoute = require('./routes/locationRoutes.js');
 
 dotenv.config();
 
 const app = express();
+app.use(express.json());
+app.use('/api', locationRoute);
 
 app.get('/', (req, res) => {
   res.status(200).json({
