@@ -2,6 +2,11 @@ const express = require('express');
 const dotenv = require('dotenv');
 const { connectToDB } = require('./config/database.js');
 const locationRoute = require('./routes/locationRoutes.js');
+const express = require("express");
+const dotenv = require("dotenv");
+const { connectToDB } = require("./config/database.js");
+const swaggerUi = require("swagger-ui-express");
+const swaggerDocument = require("./swagger.json");
 
 dotenv.config();
 
@@ -10,6 +15,9 @@ app.use(express.json());
 app.use('/api', locationRoute);
 
 app.get('/', (req, res) => {
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+app.get("/", (req, res) => {
   res.status(200).json({
     message: 'Welcome to Car Rental API',
   });
