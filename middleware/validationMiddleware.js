@@ -362,7 +362,7 @@ const addBookingValidation = [
 const mongoIdValidation = [
   param("id")
     .notEmpty()
-    .withMessage("Book ID cannot be empty")
+    .withMessage("Id cannot be empty")
     .isMongoId()
     .withMessage("Invalid Mongo ID"),
 ];
