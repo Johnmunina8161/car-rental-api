@@ -1,12 +1,6 @@
 const mongoose = require("mongoose");
 
 const bookingSchema = new mongoose.Schema({
-  bookingNumber: {
-    type: String,
-    unique: true,
-    required: true,
-  },
-
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
@@ -40,12 +34,6 @@ const bookingSchema = new mongoose.Schema({
     type: Date,
     required: [true, "Return date is required"],
   },
-
-  actualPickupDate: Date,
-  actualReturnDate: Date,
-
-  pickupTime: String,
-  returnTime: String,
 
   duration: {
     type: Number,

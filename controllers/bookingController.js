@@ -20,4 +20,42 @@ const getAllBookingsController = async (req, res) => {
   }
 };
 
-module.exports = { getAllBookingsController };
+const addBookingController = async (req, res) => {
+  const {
+    car,
+    pickupLocation,
+    returnLocation,
+    pickupDate,
+    returnDate,
+    duration,
+    dailyRate,
+    totalAmount,
+  } = req.body;
+
+  try {
+    const newBooking = new Booking({
+      user: req.user.id,
+      car,
+      pickupLocation,
+      returnLocation,
+      pickupDate,
+      returnDate,
+      duration,
+      dailyRate,
+      totalAmount,
+    });
+
+    const savedBooking = await newBooking.save();
+
+    return res.status(201).json({
+      success: true,
+      message: "Booking successfully created",
+      data: savedBooking,
+    });
+  } catch (error) {
+    console.log(`Error in addBookingController: ${error}`);
+    return res.status(500).json("Internal Server Error");
+  }
+};
+
+module.exports = { getAllBookingsController, addBookingController };
