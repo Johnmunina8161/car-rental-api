@@ -3,6 +3,7 @@ const dotenv = require("dotenv");
 const { connectToDB } = require("./config/database.js");
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./swagger.json");
+const bookingsRouter = require("./routes/bookingRoutes.js");
 
 dotenv.config();
 
@@ -15,6 +16,8 @@ app.get("/", (req, res) => {
     message: "Welcome to Car Rental API",
   });
 });
+
+app.use("/api/bookings", bookingsRouter);
 
 const PORT = process.env.PORT || 3000;
 
