@@ -35,6 +35,41 @@
       },
       "post": {
         "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "car": {
+                  "example": "any"
+                },
+                "pickupLocation": {
+                  "example": "any"
+                },
+                "returnLocation": {
+                  "example": "any"
+                },
+                "pickupDate": {
+                  "example": "any"
+                },
+                "returnDate": {
+                  "example": "any"
+                },
+                "duration": {
+                  "example": "any"
+                },
+                "dailyRate": {
+                  "example": "any"
+                },
+                "totalAmount": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
         "responses": {
           "201": {
             "description": "Created"
