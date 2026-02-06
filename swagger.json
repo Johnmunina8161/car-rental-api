@@ -2,179 +2,59 @@
   "swagger": "2.0",
   "info": {
     "title": "Car Rental API",
-    "description": "CSE 341 Final Project",
+    "description": "API for managing car rentals, vehicles, and locations.",
     "version": "1.0.0"
   },
-  "host": "localhost:3000",
+  "host": "your-app.onrender.com",
   "basePath": "/",
-  "schemes": ["http"],
-
+  "schemes": ["https"],
   "paths": {
-    "/": {
+    "/api/cars": {
       "get": {
-        "summary": "API Root",
+        "summary": "Retrieve all cars",
         "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-
-   
-
-    "/cars": {
-      "x-author": "John Munina",
-      "get": {
-        "tags": ["Cars"],
-        "summary": "Get all cars",
-        "responses": {
-          "200": {
-            "description": "List of cars",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Car"
-              }
-            }
-          }
+          "200": { "description": "Success" },
+          "500": { "description": "Server Error" }
         }
       },
       "post": {
-        "tags": ["Cars"],
-        "summary": "Create a new car (Admin only)",
-        "security": [
-          {
-            "Bearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "car",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Car"
-            }
-          }
-        ],
+        "summary": "Add a new car to inventory",
+        "parameters": [{
+          "name": "body",
+          "in": "body",
+          "schema": { "$ref": "#/definitions/Car" }
+        }],
         "responses": {
-          "201": {
-            "description": "Car created"
-          }
+          "201": { "description": "Car Created" },
+          "400": { "description": "Validation Error" }
         }
       }
     },
-
-    "/cars/{id}": {
-      "x-author": "John Munina",
-      "get": {
-        "tags": ["Cars"],
-        "summary": "Get car by ID",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Car found",
-            "schema": {
-              "$ref": "#/definitions/Car"
-            }
-          }
-        }
-      },
+    "/api/cars/{id}": {
       "put": {
-        "tags": ["Cars"],
-        "summary": "Update car (Admin only)",
-        "security": [
-          {
-            "Bearer": []
-          }
-        ],
+        "summary": "Update car details",
         "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "car",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Car"
-            }
-          }
+          { "name": "id", "in": "path", "required": true, "type": "string" },
+          { "name": "body", "in": "body", "schema": { "$ref": "#/definitions/Car" } }
         ],
-        "responses": {
-          "200": {
-            "description": "Car updated"
-          }
-        }
+        "responses": { "204": { "description": "Updated" } }
       },
       "delete": {
-        "tags": ["Cars"],
-        "summary": "Delete car (Admin only)",
-        "security": [
-          {
-            "Bearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Car deleted"
-          }
-        }
+        "summary": "Delete a car",
+        "parameters": [{ "name": "id", "in": "path", "required": true, "type": "string" }],
+        "responses": { "200": { "description": "Deleted" } }
       }
     }
-
-
   },
-
-  "securityDefinitions": {
-    "Bearer": {
-      "type": "apiKey",
-      "name": "Authorization",
-      "in": "header",
-      "description": "JWT Authorization header using the Bearer scheme. Example: \"Bearer {token}\""
-    }
-  },
-
   "definitions": {
     "Car": {
       "type": "object",
-      "required": ["make", "model", "year"],
+      "required": ["make", "model", "year", "dailyRate"],
       "properties": {
-        "make": {
-          "type": "string",
-          "example": "Toyota"
-        },
-        "model": {
-          "type": "string",
-          "example": "Corolla"
-        },
-        "year": {
-          "type": "integer",
-          "example": 2023
-        },
-        "available": {
-          "type": "boolean",
-          "example": true
-        }
+        "make": { "type": "string", "example": "Toyota" },
+        "model": { "type": "string", "example": "Camry" },
+        "year": { "type": "integer", "example": 2022 },
+        "dailyRate": { "type": "number", "example": 45.00 }
       }
     }
   }
